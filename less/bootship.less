@@ -1,0 +1,443 @@
+
+/**
+ *  Here are the basic Bootstrap customizations for Drupal
+ *  @author Paulmicha
+ */
+
+/*      Fixing broken CSS heritage
+*/
+#admin-menu li,
+#admin-menu li a { line-height:1.4em; }
+ul.secondary a.active { border-bottom:inherit; }
+.breadcrumb { padding:0; }
+.krumo-root { color:@black; }
+#styleguide-header { background:transparent; border:0 none; }
+fieldset.container-inline label,
+fieldset.container-inline .controls { float:left; margin-right:10px; }
+.vertical-tabs .form-type-textfield input { min-height:@inputHeight; }
+.form-actions { padding-left:0; border:0 none; background-color:transparent; }
+.node-form .form-actions { border-top:1px solid @grayDark; }
+.marker,
+.form-required { color:inherit; }
+.chzn-container { margin-bottom:@baseLineHeight / 2; }
+.chzn-container-single .chzn-single
+{
+    font-family:@baseFontFamily; padding:4px 6px; height:@baseLineHeight;
+    font-size:@baseFontSize; line-height:@baseLineHeight; .border-radius(@inputBorderRadius); vertical-align:middle;
+    color:@grayDarker;
+    background:@inputBackground;
+    border:1px solid @inputBorder;
+    
+    .box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
+    .transition(~"border linear .2s, box-shadow linear .2s");
+    // Focus state
+    &:focus {
+        border-color:rgba(82,168,236,.8);
+        outline:0;
+        outline:thin dotted \9; /* IE6-9 */
+        .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)");
+    }
+}
+.chzn-container-active .chzn-single-with-drop { .border-bottom-left-radius( 0 ); .border-bottom-right-radius( 0 ); }
+.chzn-drop li { color:@grayDark; }
+.chzn-container-single .chzn-single div b { background-position:0 5px; }
+.chzn-container-active .chzn-single-with-drop div b { background-position:-18px 5px; }
+td .chzn-container { margin-bottom:0; }
+td.radio input[type="radio"],
+td.checkbox input[type="checkbox"] {
+  float:none;
+  margin-left:0px;
+}
+/*
+td.active { background-color:transparent; }
+tr.odd .form-item,
+tr.even .form-item { white-space:normal; }
+*/
+
+/*      Use "variable-ized" units
+*/
+.form-item,
+.form-actions { margin:@vsu 0; }
+
+/*      Note Paul 16:31 20/01/2013 :
+        Weird mix of floats & inline breaks most admin screens, so I'm now turning this off
+*/
+.container-inline div { display:block; }
+/*
+.container-inline label { display:inline; }
+*/
+
+/*      Admin menu
+*/
+#admin-menu { margin:0; padding:0; }
+
+
+/*      Fixing Drupal "Bootstrapped" messages
+*/
+.alert.alert-success a { color:@grayDarker; }
+.alert li { list-style:none; }
+
+/*      Drupal Admin specifics
+*/
+label { font-weight:bold; }
+
+/*      This bit styles matched elements as icons (FontAwesome icon font)
+        @see font-awesome.less
+*/
+.token-tree .expander,
+.draggable .tabledrag-handle .handle,
+td.status-icon > div
+{
+  font-family:FontAwesome;
+  font-weight:normal;
+  font-style:normal;
+  text-decoration:inherit;
+  -webkit-font-smoothing:antialiased;
+  display:inline;
+  width:auto;
+  height:auto;
+  line-height:normal;
+  vertical-align:baseline;
+  background-image:none;
+  background-position:0% 0%;
+  background-repeat:repeat;
+  margin-top:0;
+}
+#admin-dblog .icon { font-family:FontAwesome; font-weight:normal; font-style:normal; text-decoration:inherit;
+    -webkit-font-smoothing:antialiased; line-height:normal; vertical-align:middle; background:transparent none; }
+#admin-dblog .icon,
+td.status-icon { text-align:center; }
+/*
+#admin-dblog td a,
+.system-status-report tr a { color:@black; }
+*/
+
+/*      Bug Iframe JqueryUI (media selector)
+*/
+.ui-dialog .ui-dialog-content { padding:0; }
+
+/*      Quand on n'exclut pas tous les fichiers ".admin.css" - cf. options mothership,
+        (on a qd mm besoin de certains)
+        faudrait faire une whitelist, mais pas le temps
+        -> override
+*/
+table.system-status-report td.status-icon { width:auto; padding:@stdpad; }
+table.system-status-report td.status-icon div { width:auto; height:auto; }
+table.system-status-report tr.error td.status-icon div,
+table.system-status-report tr.warning td.status-icon div { background:transparent none; }
+
+/*      Drupal Admin specifics - Reports > Recent log messages, Reports > Status Report
+*/
+.system-status-report tbody { border:0 none; }
+table tr.dblog-notice,
+.system-status-report tr.ok { color:@successText; background-color:@successBackground; border-color:@successBorder; }
+table tr.dblog-notice td,
+.system-status-report tr.ok td { border:0 none; }
+table tr.dblog-notice:hover,
+.system-status-report tr.ok:hover { background-color:darken( @successBackground, 8% ); }
+table tr.dblog-notice:hover td,
+.system-status-report tr.ok:hover td { background:none; }
+.dblog-notice .icon:before,
+.ok td.status-icon > div:before { color:@successText; content:"\f00c"; /* FontAwesome:icon-ok */ }
+ 
+table tr.dblog-info,
+.system-status-report tr.info { color:@infoText; background-color:@infoBackground; border-color:@infoBorder; }
+table tr.dblog-info td,
+.system-status-report tr.info td { border:0 none; }
+table tr.dblog-info:hover,
+.system-status-report tr.info:hover { background-color:darken( @infoBackground, 8% ); }
+table tr.dblog-info:hover td,
+.system-status-report tr.info:hover td { background:none; }
+.dblog-info .icon:before,
+.info td.status-icon > div:before { color:@infoText; content:"\f05a"; /* FontAwesome:icon-info-sign */ }
+
+table tr.dblog-warning,
+.system-status-report tr.warning { color:@warningText; background-color:@warningBackground; border-color:@warningBorder; }
+table tr.dblog-warning td,
+.system-status-report tr.warning td { border:0 none; }
+table tr.dblog-warning:hover,
+.system-status-report tr.warning:hover { background-color:darken( @warningBackground, 8% ); }
+table tr.dblog-warning:hover td,
+.system-status-report tr.warning:hover td { background:none; }
+.dblog-warning .icon:before,
+.warning td.status-icon > div:before { color:@warningText; content:"\f071"; /* FontAwesome:icon-warning-sign */ }
+
+table tr.dblog-error,
+.system-status-report tr.error { color:@errorText; background-color:@errorBackground; border-color:@errorBorder; }
+table tr.dblog-error td,
+.system-status-report tr.error td { border:0 none; }
+table tr.dblog-error:hover,
+.system-status-report tr.error:hover { background-color:darken( @errorBackground, 8% ); }
+table tr.dblog-error:hover td,
+.system-status-report tr.error:hover td { background:none; }
+.dblog-error .icon:before,
+.error td.status-icon > div:before { color:@errorText; content:"\f05e"; /* FontAwesome:icon-ban-circle */ }
+
+/*      Drupal admin specifics - icons
+*/
+.draggable .tabledrag-handle .handle:before { content:"\f047"; /* FontAwesome:icon-move */ }
+
+/*      Drupal admin specifics - tokens
+        @todo 2013/01/31 17:40:16 - unset default styles first + use less bold icons
+*/
+.token-tree .expander { padding-right:@gridGutterWidth; cursor:pointer; }
+.token-tree .expander:before { content: "\f054"; /* FontAwesome:icon-chevron-right */ }
+.token-tree .expanded .expander:before { content: "\f078"; /* FontAwesome:icon-chevron-down */ }
+
+/*      Drupal admin specifics - Node Forms
+*/
+.node-form > div + div { margin-top:@vsu; }
+/*      Block formatting context (clearfix) needed
+        @see http://nicolasgallagher.com/micro-clearfix-hack/
+*/
+.node-form > div:before,
+.node-form > div:after { content:" "; display:table; }
+.node-form > div:after { clear:both; }
+.node-form > div { *zoom:1; } /* IE 6/7 */
+
+.node-form .form-actions { border:0 none; }
+/*
+#edit-title { width:( @gridRowWidth - 12px - @inputBorderRadius ); }
+label,
+legend { color:@white; }
+*/
+.input-file + .form-submit { margin-left:@gridGutterWidth; }
+
+/*      This is specific to the ds_forms layout
+*/
+.title-references i { color:@pink; }
+
+/*      Drupal admin specifics - field UI
+*/
+.draggable .label-input input[type="text"] { float:left; }
+.draggable .label-input .add-new-placeholder { line-height:@baseLineHeight; }
+.draggable .label-input small { display:none; }
+
+/*      Drupal admin specifics - Content List Page
+        @todo 2013/02/19 11:39:32 - check the following sizes with different grid value and/or base font size value
+*/
+.exposed-filters .filters { width:30em; margin:1em .5em 0 .5em; }
+.exposed-filters .filters + .form-actions { float:left; border:0 none; padding:1em 0 0 0; }
+#node-admin-content .fieldset-wrapper .form-item { float:left; margin-right:1em; margin-bottom:0; }
+#node-admin-content .fieldset-wrapper .form-item + .form-submit { margin:1em 1em 0 0; }
+
+/*      Drupal admin specifics - Image Crop
+*/
+#imagecrop-ui img,
+#imagecrop-preview img,
+#imagecrop-crop-container img { width:auto; max-width:none; }
+
+/*      Drupal admin specifics - CTools
+*/
+div.ctools-modal-content { background:@bodyBackground; color:@textColor; }
+
+/*      Drupal admin specifics - Address Fields
+*/
+.addressfield-container-inline .form-item { display:inline-block; }
+.addressfield-container-inline .form-item + .form-item { margin-left:@gridGutterWidth; }
+
+/*      Drupal admin specifics - Views
+*/
+.views-display-top,
+.ctools-button-processed,
+.views-ui-dialog .form-buttons,
+.views-ui-dialog .views-override,
+.views-ui-dialog #views-ajax-title,
+.views-displays .secondary .action-list li,
+.views-filterable-options .even .form-type-checkbox,
+.views-ui-display-tab-bucket .even { background:@bodyBackground; }
+/*
+.views-displays .secondary .action-list input { color:#222; }
+.views-displays,
+.views-display-top,
+#views-preview-wrapper,
+.views-displays .secondary a,
+.views-display-column > .ctools-collapsible-handle,
+.views-ui-display-tab-bucket { border-color:@grayDark; }
+*/
+.ctools-dropbutton > div { float:left; }
+
+/*      Forms - button
+*/
+.btn + a,
+.btn + .button,
+.button + .btn,
+.button + .button,
+.btn + .btn { margin-left:1.2em; }
+
+/*      Forms - checkboxes & fields
+        @todo 2013/02/19 11:40:56 - check the following absolute pixel sizes
+*/
+.form-item small { display:block; }
+html.js input.form-autocomplete { background-position:100% 8px; }
+html.js input.throbbing { background-position:100% -12px; }
+input[type="radio"],
+input[type="checkbox"] { margin:0 0 2px 0; vertical-align:middle; }
+input[type="radio"] + label,
+input[type="checkbox"] + label { margin:2px 0 0 4px; }
+
+
+/*      Forms - fieldsets & legends
+        Note : Scheduler module breaks fieldsets inside vertical tabs.
+*/
+div.vertical-tabs .vertical-tabs-panes fieldset fieldset,
+fieldset
+{
+    position:relative;
+    top:12px;
+    border:1px solid @tableBorder;
+    margin-top:@vsu;
+    margin-bottom:@vsu * 2;
+    padding:0 0 @gridGutterWidth/2;
+    .border-radius( @baseBorderRadius );
+}
+fieldset.collapsed { .border-radius( 0 ); }
+fieldset legend
+{
+    position:absolute;
+    top:-12px;
+    left:-1px; /* LTR, this is the width of the fieldset'sborder width */
+    display:block;
+    border:1px solid @tableBorder;
+    border-bottom:none;
+    .border-top-left-radius( @baseBorderRadius );
+    .border-top-right-radius( @baseBorderRadius );
+    padding:@stdpad_v 0;
+    
+    width:100%;
+    
+    line-height:@baseLineHeight;
+    text-indent:@gridGutterWidth / 2;
+    font-size:@baseFontSize;
+    
+    font-weight:@tableHeadTextWeight;
+    background:@FieldsetLegendBackground;
+    color:@tableHeadTextColor;
+}
+fieldset.collapsed legend { border-bottom:1px solid @tableBorder; .border-radius( @baseBorderRadius ); }
+legend a { color:@tableHeadLinkColor; line-height:inherit; font-size:inherit; }
+legend a:hover,
+legend a:focus,
+legend a:active { color:@tableHeadLinkColorHover; }
+fieldset .fieldset-wrapper { padding:@vsu*2 @gridGutterWidth/2 0 @gridGutterWidth/2; .box-sizing( border-box ); }
+fieldset .fieldset-description { margin-top:@vsu/2; margin-bottom:@vsu; font-style:italic; }
+
+/*      Forms - vertical tabs
+*/
+.vertical-tabs { background:@bodyBackground; }
+div.vertical-tabs,
+.vertical-tabs ul.vertical-tabs-list,
+.vertical-tabs ul.vertical-tabs-list li { border-color:@tableBorder; }
+.vertical-tabs-panes fieldset .fieldset-wrapper { padding-top:0; }
+.vertical-tabs ul.vertical-tabs-list li { background:@VerticalTabsInactiveBackground; }
+.vertical-tabs ul.vertical-tabs-list li.selected { background:@bodyBackground; }
+/*      @todo 2013/02/19 11:41:46 - check the following sizes : */
+.vertical-tabs fieldset.vertical-tabs-pane { padding:0 1em 2em 1em }
+
+
+/*      Forms - date fields
+*/
+.date-float,
+.date-clear .container-inline .form-item,
+.container-inline-date .form-item { display:inline-block; margin:0; }
+.date-float + .date-float,
+.date-clear .container-inline .form-item + .form-item,
+.container-inline-date .form-item + .form-item { margin-left:@gridGutterWidth; }
+.container-inline-date + .container-inline-date { margin-top:@gridGutterWidth; }
+.byday .form-item { display:inline-block; }
+.byday .form-item + .form-item { margin-left:@gridGutterWidth; }
+.container-inline.count { margin-bottom:@baseLineHeight / 2; }
+.container-inline.count input { margin-bottom:0; }
+.date-prefix-inline { display:inline; }
+.date-repeat-radios-item input + .form-wrapper,
+.date-prefix-inline + .form-wrapper { display:inline-block; vertical-align:top; padding-left:@gridGutterWidth; }
+.date-repeat-radios-item input + .form-wrapper .form-item:first-child,
+.date-prefix-inline + .form-wrapper .form-item:first-child { margin-top:0; }
+
+/*      Same style as Bootstrap's forms ".add-on" for ".field-prefix" & ".field-suffix"
+*
+.field-prefix,
+.field-suffix { display:inline-block; width:auto; height:@baseLineHeight; min-width:16px; padding:4px 5px; font-size:@baseFontSize; font-weight:normal; line-height:@baseLineHeight; text-align:center; text-shadow:0 1px 0 @white; background-color:@grayLighter; border:1px solid #ccc; }
+.field-prefix + input,
+.field-prefix + select,
+.field-prefix + .uneditable-input,
+input + .field-suffix,
+select + .field-suffix,
+.uneditable-input + .field-suffix { position:relative; margin-bottom:0; *margin-left:0; vertical-align:top; .border-radius(0 @inputBorderRadius @inputBorderRadius 0);
+    &:focus { z-index:2; }}
+input + .field-suffix,
+select + .field-suffix,
+.uneditable-input + .field-suffix { .border-radius(@inputBorderRadius 0 0 @inputBorderRadius); }
+.add-on + .field-suffix,
+.btn + .field-suffix,
+.btn-group + .field-suffix { margin-left:-1px; }
+/**/
+/*      update 12:30 21/01/2013 - using "help-inline" instead
+        & fix margins
+*/
+.help-inline + input,
+.help-inline + select,
+.help-inline + .uneditable-input { margin-bottom:0; }
+input + small,
+select + small,
+/*      update 23:16 27/01/2013 - avant d'ajouter ".form-item small" - ex: input time, qui rajoute un wrapper au click
+.form-item small,
+*/
+.form-item span + small,
+.uneditable-input + small { margin-top:-@baseLineHeight/4; }
+/*
+@baseLineHeight / 2
+*/
+
+
+/*      Tables
+*/
+table { width:100%; border:0 none; border-top:1px solid @tableBorder; margin:@vsu 0; border-collapse:collapse; border-spacing:0; }
+thead tr { background:@tableHeadBackground; }
+thead th { color:@tableHeadTextColor; font-weight:@tableHeadTextWeight; vertical-align:baseline; }
+thead th a { color:@tableHeadLinkColor; }
+thead th a:hover { color:@tableHeadLinkColorHover; }
+tbody tr th { vertical-align:top; }
+tr td,
+tr th { border-bottom:1px solid @tableBorder; padding:@stdpad; }
+tr.odd { background:@tableBackgroundAccent; }
+tr,
+tr.even { background:@tableBackground; }
+tbody
+{
+    tr:hover > td,
+    tr:hover > th { background-color:@tableBackgroundHover; }
+}
+td.active { background-color:@tableBackgroundHover; }
+table ul.links { margin:0; padding:0; font-size:1em; }
+table ul.links li { padding:0 1em 0 0; }
+tr.draggable input { margin-bottom:0; }
+#-add-new-field input { margin-bottom:inherit; }
+
+/*      Exception for inline_entity_form
+*/
+tr.ief-row-form > td,
+tr.ief-row-form > th,
+tr.ief-row-form:hover > td,
+tr.ief-row-form:hover > th { background:@tableBackground; }
+
+
+/*
+Class names for grid :
+
+row
+row-fluid
+span1
+span2
+span3
+span4
+span5
+span6
+span7
+span8
+span9
+span10
+span11
+span12
+*/
+

@@ -1,0 +1,28 @@
+//
+// Breadcrumbs
+// hack Paul 2013/02/18 16:46:43 - la couleur de fond en DUR dans Bootstrap est une ineptie
+// --------------------------------------------------
+
+
+.breadcrumb {
+  padding: 8px 15px;
+  margin: 0 0 @baseLineHeight;
+  list-style: none;
+  /*
+  // WTF ?
+  background-color: #f5f5f5;
+  */
+  .border-radius(@baseBorderRadius);
+  > li {
+    display: inline-block;
+    .ie7-inline-block();
+    text-shadow: 0 1px 0 @white;
+    > .divider {
+      padding: 0 5px;
+      color: #ccc;
+    }
+  }
+  > .active {
+    color: @grayLight;
+  }
+}
